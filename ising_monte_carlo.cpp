@@ -1,3 +1,29 @@
+/*****************
+Simple algorithm for simulating classical ising system with 
+volume cubic simple lattice with periodic boundary conditions
+
+**Defines:
+SEED - initial random seed (may be changed)
+L - number of spins along one axis (may be changed)
+NEIGH - number of neighbours of one spin (don't change)
+J - exchange integral. +1 means ferromagnetic -1 antiferromagnetic (may be changed)
+
+** Global Variables
+E - current energy of the system, updates automatically every MC step
+T - temperature in r.u. Critical is Tc=2.269.
+spins - array of spin values
+neigh - array of neighbours for every spin.
+
+** Functions
+drop() - creates a simple cubic lattice and writes the neighbours for every spin.
+    The commented lines in the body of function are different ordering types.
+eCalc() - calculates the energy of the system at the current state and writes it to E variable.
+mc(steps) - starts the MC algorithm with setted number of steps
+dbg() - any debug functions which may be overwritten. By default writes the x,y,z ccordinates and spin values to the output.
+
+*****************/
+
+
 #include <iostream>
 #include <vector>
 #include <random>
@@ -40,10 +66,9 @@ void drop(){
         for (int j=0;j<L;++j){
             for (int k=0;k<L;++k){
                 //set all up
-                //spins[num] = (i%2)?1:-1;
-                //spins[num] = (i%2^j%2^k%2)?1:-1;
-                //spins[num] = (j%2^k%2)?1:-1;
-                spins[num] = 1; //all up
+                //spins[num] = (i%2^j%2^k%2)?1:-1; // set like chessboard
+                //spins[num] = (j%2^k%2)?1:-1; //set like chessboard, but every layer coincides along Z axis
+                spins[num] = 1; //set all up
 
 
                 //left neigh
